@@ -19,6 +19,7 @@ func newSmsSingleSender(appID int, appKey string) *smsSingleSender {
 	}
 }
 
+//Send 单发短信
 func (s *smsSingleSender) Send(msgType, nationCode int, phoneNumber, msg, extend, ext string, callback callbackFunc) error {
 	reqUrl, err := url.Parse(s.url)
 	if err != nil {
@@ -67,6 +68,7 @@ func (s *smsSingleSender) Send(msgType, nationCode int, phoneNumber, msg, extend
 	return request(option, callback)
 }
 
+//SendWithParam 指定模板ID单发
 func (s *smsSingleSender) SendWithParam(nationCode int, phoneNumber string, templID int, params []string, sign, extend, ext string, callback callbackFunc) error {
 	reqUrl, err := url.Parse(s.url)
 	if err != nil {
@@ -131,6 +133,7 @@ func newSmsMultiSender(appID int, appKey string) *smsMultiSender {
 	}
 }
 
+//Send 群发短信
 func (s *smsMultiSender) Send(msgType, nationCode int, phoneNumbers []string, msg, extend, ext string, callback callbackFunc) error {
 	reqUrl, err := url.Parse(s.url)
 	if err != nil {
@@ -180,6 +183,7 @@ func (s *smsMultiSender) Send(msgType, nationCode int, phoneNumbers []string, ms
 	return request(option, callback)
 }
 
+// SendWithParam 指定模板ID群发
 func (s *smsMultiSender) SendWithParam(nationCode int, phoneNumbers []string, templID int, params []string, sign, extend, ext string, callback callbackFunc) error {
 	reqUrl, err := url.Parse(s.url)
 	if err != nil {
@@ -245,7 +249,7 @@ func newSmsStatusPuller(appID int, appKey string) *smsStatusPuller {
 	}
 }
 
-func (s *smsStatusPuller) Pull(msgType, max int, callback callbackFunc) error {
+func (s *smsStatusPuller) pull(msgType, max int, callback callbackFunc) error {
 	reqUrl, err := url.Parse(s.url)
 	if err != nil {
 		return err
@@ -279,13 +283,14 @@ func (s *smsStatusPuller) Pull(msgType, max int, callback callbackFunc) error {
 	}
 	return request(option, callback)
 }
-
+//PullCallBack 拉取短信回执
 func (s *smsStatusPuller) PullCallBack(max int, callback callbackFunc) error {
-	return s.Pull(0, max, callback)
+	return s.pull(0, max, callback)
 }
 
+//PullReply 拉取回复
 func (s *smsStatusPuller) PullReply(max int, callback callbackFunc) error {
-	return s.Pull(1, max, callback)
+	return s.pull(1, max, callback)
 }
 
 type smsMobileStatusPuller struct {
@@ -302,7 +307,7 @@ func newSmsMobileStatusPuller(appID int, appKey string) *smsMobileStatusPuller {
 	}
 }
 
-func (s *smsMobileStatusPuller) Pull(msgType, nationCode int, mobile string, beginTime, endTime, max int, callback callbackFunc) error {
+func (s *smsMobileStatusPuller) pull(msgType, nationCode int, mobile string, beginTime, endTime, max int, callback callbackFunc) error {
 	reqUrl, err := url.Parse(s.url)
 	if err != nil {
 		return err
@@ -345,10 +350,12 @@ func (s *smsMobileStatusPuller) Pull(msgType, nationCode int, mobile string, beg
 	return request(option, callback)
 }
 
+//PullCallBack 拉取单个手机号短信回执
 func (s *smsMobileStatusPuller) PullCallBack(nationCode int, mobile string, beginTime, endTime, max int, callback callbackFunc) error {
-	return s.Pull(0, nationCode, mobile, beginTime, endTime, max, callback)
+	return s.pull(0, nationCode, mobile, beginTime, endTime, max, callback)
 }
 
+//PullReply 拉取单个手机号回复
 func (s *smsMobileStatusPuller) PullReply(nationCode int, mobile string, beginTime, endTime, max int, callback callbackFunc) error {
-	return s.Pull(0, nationCode, mobile, beginTime, endTime, max, callback)
+	return s.pull(1, nationCode, mobile, beginTime, endTime, max, callback)
 }

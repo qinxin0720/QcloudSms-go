@@ -20,7 +20,8 @@ func newPromptVoiceSender(appID int, appKey string) *promptVoiceSender {
 	}
 }
 
-func (s *promptVoiceSender) Send(nationCode int, phoneNumber, promptType, msg string, playTimes int, ext string, callback callbackFunc) error {
+//Send 发送语音通知和验证码
+func (s *promptVoiceSender) Send(nationCode int, phoneNumber string, promptType int, msg string, playTimes int, ext string, callback callbackFunc) error {
 	if playTimes <= 0 {
 		return errors.New("playtimes must great than zero")
 	}
@@ -52,7 +53,7 @@ func (s *promptVoiceSender) Send(nationCode int, phoneNumber, promptType, msg st
 
 	Body := body{
 		Tel:        Tel,
-		PromptType: promptType,
+		PromptType: strconv.Itoa(promptType),
 		PromptFile: msg,
 		PlayTimes:  strconv.Itoa(playTimes),
 		Sig:        calculateSignature(s.appKey, random, now, phoneNumbers),

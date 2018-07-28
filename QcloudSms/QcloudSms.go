@@ -18,6 +18,7 @@ type qcloudsms struct {
 	FileVoiceSender          *fileVoiceSender
 }
 
+//NewQcloudSms new一个qcloudsms实例
 func NewQcloudSms(appid int, appkey string) (*qcloudsms, error) {
 	if appkey == "" {
 		return nil, errors.New("appkey is nil")
