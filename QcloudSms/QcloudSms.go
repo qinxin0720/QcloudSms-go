@@ -1,6 +1,6 @@
 package QcloudSms
 
-import "github.com/pkg/errors"
+import "errors"
 
 type qcloudsms struct {
 	appid                    int
