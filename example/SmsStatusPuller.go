@@ -21,7 +21,7 @@ func callback(err error, resp *http.Response, resData string) {
 func main() {
 	qcloudsms, err := QcloudSms.NewQcloudSms(appID, appKey)
 	if err != nil {
-		panic("appKey is nil")
+		panic(err)
 	}
 	//拉取短信回执以及回复
 	//拉取短信回执
