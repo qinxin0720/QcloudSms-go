@@ -21,7 +21,7 @@ func callback(err error, resp *http.Response, resData string) {
 func main() {
 	qcloudsms, err := QcloudSms.NewQcloudSms(appID, appKey)
 	if err != nil {
-		panic("appKey is nil")
+		panic(err)
 	}
 	//发送语音验证码
 	//语音验证码发送只需提供验证码数字，例如在 msg=“123”，您收到的语音通知为“您的语音验证码是1 2 3”，如需自定义内容，可以使用语音通知。
