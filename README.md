@@ -57,7 +57,7 @@ func callback(err error, resp *http.Response, resData string) {
 func main() {
 	qcloudsms, err := QcloudSms.NewQcloudSms(appID, appKey)
 	if err != nil {
-		panic("appKey is nil")
+		panic(err)
 	}
 	//单发短信
 	//发送短信没有指定模板ID时，发送的内容需要与已审核通过的模板内容相匹配，才可能下发成功，否则返回失败。
@@ -99,7 +99,7 @@ func callback(err error, resp *http.Response, resData string) {
 func main() {
 	qcloudsms, err := QcloudSms.NewQcloudSms(appID, appKey)
 	if err != nil {
-		panic("appKey is nil")
+		panic(err)
 	}
 	//群发短信
 	qcloudsms.SmsMultiSender.Send(0, 86, phoneNumbers,
@@ -137,7 +137,7 @@ func callback(err error, resp *http.Response, resData string) {
 func main() {
 	qcloudsms, err := QcloudSms.NewQcloudSms(appID, appKey)
 	if err != nil {
-		panic("appKey is nil")
+		panic(err)
 	}
 	//发送语音验证码
 	//语音验证码发送只需提供验证码数字，例如在 msg=“123”，您收到的语音通知为“您的语音验证码是1 2 3”，如需自定义内容，可以使用语音通知。
@@ -174,7 +174,7 @@ func callback(err error, resp *http.Response, resData string) {
 func main() {
 	qcloudsms, err := QcloudSms.NewQcloudSms(appID, appKey)
 	if err != nil {
-		panic("appKey is nil")
+		panic(err)
 	}
 	//拉取短信回执以及回复
 	//拉取短信回执
