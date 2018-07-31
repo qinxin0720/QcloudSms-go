@@ -23,7 +23,7 @@ func callback(err error, resp *http.Response, resData string) {
 func main() {
 	qcloudsms, err := QcloudSms.NewQcloudSms(appID, appKey)
 	if err != nil {
-		panic("appKey is nil")
+		panic(err)
 	}
 	//单发短信
 	//发送短信没有指定模板ID时，发送的内容需要与已审核通过的模板内容相匹配，才可能下发成功，否则返回失败。
