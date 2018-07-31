@@ -23,7 +23,7 @@ func callback(err error, resp *http.Response, resData string) {
 func main() {
 	qcloudsms, err := QcloudSms.NewQcloudSms(appID, appKey)
 	if err != nil {
-		panic("appKey is nil")
+		panic(err)
 	}
 	//群发短信
 	qcloudsms.SmsMultiSender.Send(0, 86, phoneNumbers,
